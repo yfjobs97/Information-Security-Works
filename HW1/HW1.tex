@@ -1,0 +1,692 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, alltt, amssymb, xspace, times, epsfig, textcomp}
+
+\setlength{\evensidemargin}{0in} \setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in} \setlength{\textheight}{8.5in}
+\setlength{\topmargin}{0in} \setlength{\headheight}{0in}
+
+\renewcommand{\Pr}{\ensuremath{\mathbf{Pr}}\xspace}
+
+\newcommand{\tuple}[1]{\ensuremath{\langle #1 \rangle}\xspace}
+
+\newcommand{\PT}{\ensuremath{\mathsf{PT}}\xspace}
+\newcommand{\CT}{\ensuremath{\mathsf{CT}}\xspace}
+\newcommand{\Key}{\ensuremath{\mathsf{Key}}\xspace}
+
+\newcommand{\CC}{\ensuremath{\mathcal{C}}\xspace}
+\newcommand{\KK}{\ensuremath{\mathcal{K}}\xspace}
+\newcommand{\MM}{\ensuremath{\mathcal{M}}\xspace}
+
+\newcommand{\E}{\ensuremath{\mathbb{E}}\xspace}
+\newcommand{\D}{\ensuremath{\mathbb{D}}\xspace}
+\newcommand{\K}{\ensuremath{\mathbb{K}}\xspace}
+
+\newcommand{\Gen}{\ensuremath{\mathsf{Gen}}\xspace}
+\newcommand{\Enc}{\ensuremath{\mathsf{Enc}}\xspace}
+\newcommand{\Dec}{\ensuremath{\mathsf{Dec}}\xspace}
+
+
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\noindent \textbf{CS 6324: Information Security\hspace*{\fill}Spring 2021}
+\begin{center}
+{\LARGE Homework \#1}
+\end{center}
+
+\paragraph{Due date \& time:} 11:59pm CST on February 12, 2021.
+Submit to eLearning by the due time.
+
+
+\vspace*{-0.1in}\paragraph{Additional Instructions:} The submitted homework must be typed. Using \LaTeX{} is recommended, but not required.
+\\
+
+
+\begin{description}
+ \item[Problem 1 (10 pts)] Confidentiality, Integrity, Availability.
+\begin{itemize}
+ \item  (3 pts)
+State what is Confidentiality, Integrity, and Availability.
+	\begin{itemize}
+		\item
+		Confidentiality: The property, that information is not made available or disclosed to unauthorized individuals, entities, or processes.
+		\item
+		Integrity: Maintaining and assuring the accuracy and completeness of data over its entire lifecycle.
+		\item
+		Availability:  The computing systems used to store and process the information, the security controls used to protect it, and the communication channels used to access it must be functioning correctly.
+	\end{itemize}
+ \item (3 pts)
+For each, give two examples where they are violated.
+	\begin{itemize}
+		\item
+		Confidentiality:
+			\begin{itemize}
+				\item
+				1. Anthem Data Leakage: personal data of 80 million people were stolen, accessible by unknown attackers.
+				\item
+				2. Confidential information sent to elsewhere after opening links attached in phishing email, which compromised the OS.
+			\end{itemize}
+		\item
+		Integrity:
+			\begin{itemize}
+				\item
+				1. Ransom-ware encrypt data on the computer and ask for money payments for decryption.
+				\item
+				2. Stuxnet brought down software systems of the industry control system of the power plant.
+			\end{itemize}
+		\item
+		Availability:
+			\begin{itemize}
+				\item
+				1. Denial of service attack, shutting down a particular server on the network by sending excessive amount of requests.
+				\item
+				2. Stuxnet disable some of the key functionalities in the power plant so that they are inaccessible, allowing nuclear related incidents to happen.
+			\end{itemize}
+	\end{itemize}
+ \item (4 pts)
+Identify two computer security control measures on your computer(s).  Which of the
+three properties Confidentiality, Integrity, and Availability do they aim at
+providing? What kinds of adversaries they \textbf{cannot} defend against?
+	\begin{itemize}
+		\item
+		1. BitLocker function for hard drive
+		\begin{itemize}
+			\item
+			It is aim at protecting the confidentiality of data so it cannot be accessed by anyone unauthorised.
+			\item
+			It cannot defend against integrity threats such as low-level formatting. Once the drive is wiped, information on the hard drive is no longer available.
+		\end{itemize}
+		\item
+		2. Tamper protection
+		\begin{itemize}
+			\item
+			It is aim at protecting the integrity of data, preventing any software from changing key files of the operating system.
+			\item
+			It cannot defend against confidentiality threats as users' data may still be stolen without modifying key files of the OS. Also, availability is not guaranteed as denial of service attack arrives since blocking accessiblity does not require tampering key OS files.
+		\end{itemize}
+	\end{itemize}
+
+\end{itemize}
+
+
+ \item[Problem 2 (30 pts)] Probability Review.
+\begin{enumerate}
+ \item
+(10 pts) We roll two fair 6-sided dice.
+\begin{enumerate}
+ \item
+Find the probability that doubles are rolled.
+	\begin{itemize}
+	\item
+		\begin{tabular}{|c|c|c|c|c|c|c|} 
+		\hline
+		 & 1 & 2 & 3 & 4 & 5 & 6
+		\\ \hline
+		1 & (1,1) & (1,2) & (1,3) & (1,4) & (1,5) & (1,6)
+		\\ \hline
+		2 & (2,1) & (2,2) & (2,3) & (2,4) & (2,5) & (2,6)
+		\\ \hline
+		3 & (3,1) & (3,2) & (3,3) & (3,4) & (3,5) & (3,6)
+		\\ \hline
+		4 & (4,1) & (4,2) & (4,3) & (4,4) & (4,5) & (4,6)
+		\\ \hline
+		5 & (5,1) & (5,2) & (5,3) & (5,4) & (5,5) & (5,6)
+		\\ \hline
+		6 & (6,1) & (6,2) & (6,3) & (6,4) & (6,5) & (6,6)
+		\\ \hline
+		\end{tabular}
+	\item
+	Rolling doubles: (1,1), (2,2), etc... \\
+	Total possible rolls: 6 \texttimes \ 6 = 36 \\
+	Doubles Possible: 6 \\
+	$\Pr(doubles) = \frac{6}{36} = \frac{1}{6}$
+	\end{itemize}	
+
+ \item
+Given that the roll results in a sum of 6 or less, find the conditional probability that doubles are rolled.
+	\begin{itemize}
+	\item
+	Rolls with sum of 6 or less: 5 + 4 + 3 + 2 + 1 = 15 \\
+	$\Pr$(sum of 6 or less) = $\frac{15}{36} = \frac{5}{12}$ \\
+	Rolls of double with sum of 6 or less: 3 \\
+	$\Pr$(doubles $\wedge$ 6 or less) = $\Pr$(6 or less) * $\Pr$(doubles $|$ 6 or less) \\
+	$\Pr$(doubles $|$ 6 or less) = $\Pr$(doubles $\wedge$ 6 or less) / $\Pr$(6 or less) \\
+	$\Pr$(doubles $|$ 6 or less) = $\frac{3}{36} / \frac{5}{12} = \frac{1}{5}$ \\
+	\end{itemize}	
+ \item
+Find the probability that that larger of the two die's outcomes is at least 4.
+	\begin{itemize}
+	\item
+	Rolls that only 1 die is at least 4 : 9 + 9 = 18 \\
+	Rolls that 2 dies are at least 4: 9 \\
+	$\Pr$(larger of the 2 die's outcome is at least 4) =  $\frac{27}{36} = \frac{3}{4}$
+	\end{itemize}
+ \item
+Given that the two dice land on different numbers, find the conditional probability that at least one die roll is a 1.
+	\begin{itemize}
+	\item
+	$\Pr$(2 dices land on differnt numbers) = 1 - $\Pr(doubles) = \frac{5}{6}$ \\
+	Rolls that at least one of them is 1: 11 \\
+	Since two dice land on differnet numbers, (1,1) is excluded. \\
+	$\Pr$(at least one die roll is 1 $\wedge$ 2 dice land on different numbers) = $\frac{11 - 1}{36} = \frac{10}{36} = \frac{5}{18}$ \\
+	$\Pr$(at least one die roll is 1 $|$ 2 dice land on different numbers) \\
+	= $\Pr$(at least one die roll is 1 $\wedge$ 2 dice land on different numbers) / $\Pr$(2 dices land on differnt numbers) \\
+	= $\frac{5}{18} / \frac{5}{6} = \frac{1}{3}$
+	\end{itemize}
+ \item
+Let $X$ be the event that the first die results in an odd number, and $Y$ be the event that the rolled sum is an even number.  Compute $\Pr[X], \Pr[Y], \Pr[X \wedge Y]$.  Are $X$ and $Y$ independent?
+	\begin{itemize}
+	\item
+	If $\Pr[X \wedge Y] = \Pr[X]$ * $\Pr[Y]$, X and Y are independent. \\
+	Odd + Odd = Even; Even + Even = Even; Odd + Even = Odd. \\
+	Rolls that first die results in an odd number: 6 + 6 + 6 = 18 \\
+	$\Pr[X] = \frac{18}{36} = \frac{1}{2}$ \\
+	Rolls that the rolled sum is even = 3 + 3 + 3 + 3 + 3 + 3 = 18 \\
+	$\Pr[Y] = \frac{18}{36} = \frac{1}{2}$ \\
+	Rolls that first die is odd and that sum is even: 3 + 3 + 3 = 9  \\
+	$\Pr[X \wedge Y] = \frac{9}{36} =  \frac{1}{4}$ \\
+	Since $\Pr[X]$ * $\Pr[Y]$ =  $\frac{1}{2} * \frac{1}{2} = \frac{1}{4}$, events X and Y are independent.
+	\end{itemize}
+
+ \item
+Let $X$ be the event that the first die results in a multiple of $2$, and $Y$ be the event that the rolled sum is a multiple of $2$.  Compute $\Pr[X], \Pr[Y], \Pr[X \wedge Y]$.  Are $X$ are $Y$ independent?
+	\begin{itemize}
+	\item
+	If $\Pr[X \wedge Y] = \Pr[X]$ * $\Pr[Y]$, X and Y are independent. \\
+	Odd + Odd = Even; Even + Even = Even; Odd + Even = Odd. \\
+	Rolls that the first die is a multiple of 2: 6 + 6 + 6 = 18 \\
+	$\Pr[X] = \frac{18}{36} = \frac{1}{2}$ \\
+	Rolls that the rolled sum is a multiple of 2: 3 + 3 + 3 + 3 + 3 + 3 = 18 \\
+	$\Pr[Y] = \frac{18}{36} = \frac{1}{2}$ \\
+	Rolls that first die is a multiple of 2 and that sum is a multiple of 2: 3 + 3 + 3 = 9  \\
+	$\Pr[X \wedge Y] = \frac{9}{36} =  \frac{1}{4}$ \\
+	Since $\Pr[X]$ * $\Pr[Y]$ =  $\frac{1}{2} * \frac{1}{2} = \frac{1}{4}$, events X and Y are independent.
+	\end{itemize}
+ \item
+Let $X$ be the event that the first die results in a multiple of $3$, and $Y$ be the event that the rolled sum is a multiple of $2$.  Compute $\Pr[X | Y]$ and $\Pr[Y | X]$.  Are $X$ are $Y$ independent?
+	\begin{itemize}
+	\item
+	If $\Pr[X \wedge Y] = \Pr[X]$ * $\Pr[Y]$, X and Y are independent. \\
+	Odd + Odd = Even; Even + Even = Even; Odd + Even = Odd. \\
+	Rolls that the first die is a multiple of 3: 6 + 6 = 12 \\
+	$\Pr[X] = \frac{12}{36} = \frac{1}{3}$ \\
+	Rolls that the rolled sum is a multiple of 2: 3 + 3 + 3 + 3 + 3 + 3 = 18 \\
+	$\Pr[Y] = \frac{18}{36} = \frac{1}{2}$ \\
+	Rolls that first die is a multiple of 3 and that sum is a multiple of 2: 3 +  3 = 6  \\
+	$\Pr[X \wedge Y] = \frac{6}{36} =  \frac{1}{6}$ \\
+	Since $\Pr[X]$ * $\Pr[Y]$ =  $\frac{1}{3} * \frac{1}{2} = \frac{1}{6}$, events X and Y are independent.\\
+	\end{itemize}
+
+\end{enumerate}
+
+ \item (5 pts)
+Let $X$ denote the event that a student pass the midterm exam in a course.  And $Y$ denote the event that the student pass the final exam.  We know that $\Pr[X]=0.75$, $\Pr[Y]=0.8$, and $\Pr[Y|X]=0.9$.  (The probability that a student will pass the final exam given that he or she has passed the midterm exam is 0.9.)  Compute $\Pr[X\wedge Y]$, $\Pr[\neg X | Y]$, and $\Pr[Y | \neg X]$. Are $X$ and $Y$ independent? 
+	\begin{itemize}
+	\item
+	$\Pr[X \wedge Y] = \Pr[X] * \Pr[Y | X]$ \\
+	$\Pr[X \wedge Y] = 0.75 * 0.9 = 0.675$ \\
+	\item
+	$\Pr[Y] = \Pr[X \wedge Y] + \Pr[\neg X \wedge Y]$ \\
+	$\Pr[Y] = \Pr[X \wedge Y] + \Pr[Y] * \Pr[\neg X | Y] $ \\
+	$1 - \frac{\Pr[ X \wedge Y]}{\Pr[Y]} = \Pr[\neg X | Y]$ \\
+	$\Pr[\neg X | Y] = \frac{\Pr[Y] - \Pr[X \wedge Y]}{\Pr[Y]}$ \\
+	$\Pr[\neg X | Y] = \frac{0.8 - 0.675}{0.8}$ \\
+	$\Pr[\neg X | Y] = \frac{0.125}{0.8}$ \\
+	$\Pr[\neg X | Y] = \frac{5}{32} $ \\
+	\item
+	$\Pr[Y] = \Pr[X \wedge Y] + \Pr[\neg X \wedge Y]$ \\
+	$\Pr[Y] = \Pr[X \wedge Y] + \Pr[\neg X] * \Pr[Y | \neg X] $ \\
+	$\frac{\Pr[Y]}{\Pr[\neg X]} = \frac{\Pr[X \wedge Y]}{\Pr[\neg X]} + \Pr[Y | \neg X]$ \\
+	$\Pr[Y | \neg X] = \frac{\Pr[Y] - \Pr[X \wedge Y] }{\Pr[\neg X]}$ \\
+	$\Pr[Y | \neg X] = \frac{\Pr[Y] - \Pr[X \wedge Y] }{1 - \Pr[X]}$ \\
+	$\Pr[Y | \neg X] = \frac{0.8 - 0.675}{1 - 0.75}$ \\
+	$\Pr[Y | \neg X] = \frac{0.125}{0.25}$ \\
+	$\Pr[Y | \neg X] = \frac{1}{2} $ \\
+	\item
+	Since $\Pr[X] * \Pr[Y] = 0.75 * 0.8 = 0.6$, $\Pr[X \wedge Y] = 0.75 * 0.9 = 0.675$ \\
+	$\Pr[X \wedge Y] \neq \Pr[X] * \Pr[Y]$ \\
+	Events X and Y are not independent. \\
+	\end{itemize}
+% \item (5 pts)
+%In an automobile assembly plant, assembly lines $A$, $B$, and $C$ account respectively, for 50 percent, 30 percent, and 20 percent of the plant's total output.  The probability for a car coming off assembly line $A$ has a defect is 0.004, while the corresponding probabilities for $B$ and $C$ are 0.006 and 0.011.  Let $D$ denote the event that a car assembled at this plant has a defect.
+
+%Compute $\Pr[D]$.  Also compute $\Pr[A|D]$, $\Pr[B|D]$, $\Pr[C|D]$, i.e., given that a car assembled at the plant has defect, the probabilities that it comes off line $A$, $B$, $C$, respectively.  Are $A$ and $D$ independent?  Are $B$ and $D$ independent?\\
+
+
+ \item (6 pts)
+There are 78 qualified applicants for teaching positions in an elementary school, of which some have at least five years' teaching experience and some have not, some are married and some are single, with the exact breakdown being
+
+\begin{center}
+\begin{tabular}{|c|c|c|} \hline
+& Married & Single
+ \\ \hline
+At least five years teaching experience & 18 & 12
+  \\ \hline
+Less than five years teaching experience & 30 & 18
+ \\ \hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+ \item
+The order in which the applicants are interviewed is random.  $M$ is the event that the first applicant interviewed is married and F is the event that the first applicant interviewed has at least five years teaching experience.  Find the following probabilities: $\Pr[M], \Pr[F], \Pr[M\wedge F], \Pr[M|F], \Pr[F|M]$.  Are $M$ and $F$ independent?
+	\begin{itemize}
+	\item
+	$\Pr[M] = \frac{18+30}{78}$ \\
+	$\Pr[M] = \frac{48}{78}$ \\
+	$\Pr[M] = \frac{8}{13}$ \\
+	\item
+	$\Pr[F] = \frac{18+12}{78}$ \\
+	$\Pr[F] = \frac{30}{78}$ \\
+	$\Pr[F] = \frac{5}{13}$ \\
+	\item
+	$\Pr[M | F] = \Pr[M \wedge F] / \Pr[F]$ \\
+	Since $\Pr[M \wedge F] = \frac{18}{78} = \frac{3}{13}$ \\
+	$\Pr[M | F] = \frac{3}{13} / \frac{5}{13}$ \\
+	$\Pr[M | F] = \frac{3}{5}$ \\
+	\item
+	$\Pr[F | M] = \Pr[M \wedge F] / \Pr[M]$ \\
+	$\Pr[F | M] = \frac{3}{13} / \frac{8}{13}$ \\
+	$\Pr[F | M] = \frac{3}{8}$ \\
+	\item
+	Since $\Pr[M] * \Pr[F] = \frac{40}{169}$, and that
+	$\Pr[M \wedge F] = \frac{3}{13}$, \\
+	$\Pr[M \wedge F] \neq \Pr[M] * \Pr[F]$ \\
+	Events M and F are not independent. \\
+	\end{itemize}
+
+ \item
+Suppose that there is only one opening in the third grade, and each applicant with at least five year experience has \emph{twice} the chance of an applicant with less than five year experience.  Let $U$ denote the event that the job goes to one of the single applicants, and $V$ the event that it goes to an applicant with less than five year experience.  Find the following probabilities: $\Pr[U], \Pr[V], \Pr[U \wedge V], \Pr[U|V], \Pr[V|U]$.  Are $U$ and $V$ independent?
+	\begin{itemize}
+	\item
+	As those who have more than 5 years of experience has twice the chance, meaning 2 of the experienced can beat one inexperienced.\\
+	Ratio applied to applicants count is 2:1\\
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|} \hline
+		& Married & Single & Total
+		\\ \hline
+		greater than 5 years & 18 * $\frac{2}{3} = 12 $ & 12 * $\frac{2}{3} = 8 $ & 20
+		\\ \hline
+		less than 5 years & 30 * $\frac{1}{3} = 10 $ & 18 * $\frac{1}{3} = 6 $ & 16
+		\\ \hline
+		Total & 22 & 14 & 36
+		\\ \hline
+		\end{tabular}
+	\end{center}
+
+	\item
+	$\Pr[U]$ = $\frac{8+6}{22+14}$ \\
+	$\Pr[U] = \frac{14}{36}$ \\
+	$\Pr[U] = \frac{7}{18}$ \\
+	\item
+	$\Pr[V] = \frac{16}{20+16}$ \\
+	$\Pr[V] = \frac{16}{36}$ \\
+	$\Pr[V] = \frac{4}{9}$ \\
+	\item
+	$\Pr[U \wedge V] = \frac{6}{36} = \frac{1}{6}$ \\
+	\item
+	$\Pr[U | V] = \Pr[U \wedge V] / \Pr[V]$ \\
+	Since $\Pr[U \wedge V] = \frac{1}{6}$ \\
+	$\Pr[U | V] = \frac{1}{6} / \frac{4}{9}$ \\
+	$\Pr[U | V] = \frac{3}{8}$ \\
+	\item
+	$\Pr[V | U] = \Pr[U \wedge V] / \Pr[U]$ \\
+	$\Pr[V | U] = \frac{1}{6} / \frac{7}{18}$ \\
+	$\Pr[V | U] = \frac{3}{7}$ \\
+	\item
+	Since $\Pr[U] * \Pr[V] = \frac{9}{56}$, and that
+	$\Pr[U \wedge V] = \frac{1}{6}$, \\
+	$\Pr[U \wedge V] \neq \Pr[M] * \Pr[F]$ \\
+	Events M and F are not independent. \\
+	\end{itemize}
+\end{enumerate}
+
+ \item (9 pts)
+A test for a certain rare disease is assumed to be correct $95\%$ of the time.  Let $S$ denote the event that a person has the disease, and $T$ denote the event that the test result is positive.  We have $\Pr[T|S]=0.95$ and $\Pr[\neg T| \neg S]=0.95$.  Assume that $\Pr[S]=0.001$, i.e., the probability that a randomly drawn person has the disease is $0.001$.
+
+\begin{enumerate}
+ \item
+Compute $\Pr[S|T]$, the probability that one has the disease if one is tested positive.
+	\begin{itemize}
+	\item
+	$\Pr[T|S]=0.95, \Pr[T | \neg S]= 1 - \Pr[\neg T| \neg S] = 1 - 0.95 = 0.05, \Pr[S]=0.001, \Pr[\neg S] = 1 - 0.001 = 0.999$ \\
+	$\Pr[T] = \Pr[T \wedge S] + \Pr[T \wedge \neg S]$ \\
+	$\Pr[T] = \Pr[S] * \Pr[T | S] + \Pr[\neg S] * \Pr[T | \neg S] $ \\
+	$\Pr[T] = 0.001 * 0.95 + 0.999 * 0.05 $ \\
+	$\Pr[T] = 0.00095 + 0.04995 = 0.0509$ \\
+	Now, $\Pr[S|T] = \frac{ \Pr[T \wedge S]}{\Pr[T]}$ \\
+	$\Pr[S|T] = \frac{0.001*0.95}{0.0509} = \frac{19}{1018} \approx 0.1866$
+	\end{itemize}
+
+ \item
+Assume that one improves the test so that $\Pr[T|S]=0.998$, i.e., if one has the disease, the test will come out positive with probability 0.998.  Other things remain unchanged.  Compute  $\Pr[S|T]$.
+	\begin{itemize}
+	\item
+	$\Pr[T|S]=0.998, \Pr[T | \neg S]= 1 - \Pr[\neg T| \neg S] = 1 - 0.95 = 0.05, \Pr[S]=0.001, \Pr[\neg S] = 1 - 0.001 = 0.999$ \\
+	$\Pr[T] = \Pr[T \wedge S] + \Pr[T \wedge \neg S]$ \\
+	$\Pr[T] = \Pr[S] * \Pr[T | S] + \Pr[\neg S] * \Pr[T | \neg S] $ \\
+	$\Pr[T] = 0.001 * 0.998 + 0.999 * 0.05 $ \\
+	$\Pr[T] = 0.000998 + 0.04995 = 0.050948$ \\
+	Now, $\Pr[S|T] = \frac{ \Pr[T \wedge S]}{\Pr[T]}$ \\
+	$\Pr[S|T] = \frac{0.001*0.998}{0.050948} \approx 0.1959$
+	\end{itemize}
+ \item
+Assume that another improvement on the test improves $\Pr[\neg T| \neg S]=0.998$, but have $\Pr[T|S]$ remain at $0.95$.  Compute $\Pr[S|T]$.
+	\begin{itemize}
+	\item
+	$\Pr[T|S]=0.95, \Pr[T | \neg S]= 1 - \Pr[\neg T| \neg S] = 1 - 0.998 = 0.002, \Pr[S]=0.001, \Pr[\neg S] = 1 - 0.001 = 0.999$ \\
+	$\Pr[T] = \Pr[T \wedge S] + \Pr[T \wedge \neg S]$ \\
+	$\Pr[T] = \Pr[S] * \Pr[T | S] + \Pr[\neg S] * \Pr[T | \neg S] $ \\
+	$\Pr[T] = 0.001 * 0.95 + 0.999 * 0.002 $ \\
+	$\Pr[T] = 0.00095 + 0.001998 = 0.002948$ \\
+	Now, $\Pr[S|T] = \frac{ \Pr[T \wedge S]}{\Pr[T]}$ \\
+	$\Pr[S|T] = \frac{0.001*0.95}{0.002948} \approx 0.32225$ \\
+	\end{itemize}
+\end{enumerate}
+
+\end{enumerate}
+
+ \item[Problem 3 (8 pts)] Cryptanalysis Concepts.
+\begin{itemize}
+ \item (3 pts)
+Explain what do ciphertext-only attacks, known-plaintext attack, and chosen plaintext
+attack mean?
+	\begin{itemize}
+	\item
+	Ciphertext-only attack: The adversary knows only a number of ciphertexts. 
+	\item
+	Known-plaintext attack: The adversary knows some pairs of ciphertext and corresponding plaintext.
+	\item
+	Chosen-plaintext attack: The adversary can choose a number of messages and obtain the ciphertexts.
+	\end{itemize}
+
+ \item (2 pts)
+What attack can be used to break the substitution cipher under a ciphertext-only attack?  Explain the
+simplest way to break it under a known-plaintext attack?
+	\begin{itemize}
+	\item
+	Known-plaintext attack can be used to break the substitution cipher under a ciphertext-only attack. 
+	\item
+	The simplest way to break substitution cipher under a known-plaintext attack is to perform a frequency analysis and find out key patterns that translate plaintext to ciphertext in future attacks.  
+	\end{itemize}
+
+ \item (3 pts)
+Explain how one may be able to carry out a known-plaintext attack against the wireless encryption between the laptop used by the target user and a wireless access point.  Explain how one may be able to carry out a chosen-plaintext attack.
+	\begin{itemize}
+	\item
+	It can be done by mapping known plaintext-ciphertext pairs on hand to the new ciphertext captured between the laptop and the access point. By performing frequency test, one can find out more information about the key.  
+	\item
+	To carry out a chosen-plaintext attack, adversary can repeatedly send to the access point the chosen-plaintext and retrieve corresponding ciphertext. By finding the patterns between them, one can retrieve the key between the plain-text and cipher text.
+	\end{itemize}
+\end{itemize}
+
+
+ \item[Problem 4 (8 pts)]
+Consider the following ``Double Vigen\`{e}re encryption''.  We choose two random keys $K_1$ and $K_2$ of lengths $\ell$ and $\ell+1$.  To encrypt a message, we first use key $K_1$ to encrypt in the Vigen\`{e}re fashion, then use $K_2$ to encrypt.
+
+\begin{itemize}
+ \item (4 pts)
+Describe how to break this encryption scheme under a ciphertext only attack.  Does this double encryption offer increased level of security over Vigen\`{e}re encryption against a ciphertext only attack?
+	\begin{itemize}
+	\item
+	To break the cipher, Kasisky's Test can be used to determine repeated patterns with a distance of common multiples of $\ell$ and $\ell + 1$, due to the fact that after a distance of common multiples of $\ell$ and $\ell + 1$, repeating plaintext strings will be encrypted by repeating sections of key strings in both keys. For example: \\
+	PT: The sun met \textbf{the man} before \textbf{the man} saw the light \\
+	Let $\ell = 2, K_1$: OX \\
+	CT: HES PIK ABH \textbf{QVB AXB} YSCCOS \textbf{QVB AXB} POT HES IWDVQ \\
+	$\ell + 1 = 3, K_2$: FAN \\
+	CT: MEF UIX FBU \textbf{VVO FXO} DSPHOF \textbf{VVO FXO} UOG MEF NWQAQ \\
+	Distance between bolded text: 12, a common multiple of 2 and 3.
+	\item
+	Double encryption offers limited extra level of security when repeated no repeated text in a distance of any common multiples of the two key lengths. If a repetition is found, double encryption gives no extra level of security. 
+	\end{itemize}
+
+ \item (4 pts)
+Suppose that we know that $10\leq \ell \leq 19$.  Given a ciphertext of length $50$ and its corresponding plaintext, describe how to recover the keys so that any other message encrypted under the same key pair can be decrypted.
+	\begin{itemize}
+	\item
+	Since two levels of encryption is CT = [(PT + $K_1$) MOD 26 + $K_2$] MOD 26, it is equivalent to CT = (PT + $K_1$ + $K_2$) MOD 26. With cipher text and its corresponding plaintext on hand, $K_1$ + $K_2$ for each letter space can be recovered. Since $10\leq \ell \leq 19$ and lengts of $K_1$ and $K_2$ are $\ell$ and $\ell+1$ correspondingly, by plotting all combinations of $K_1$ and $K_2$, we can bruteforce the $K_1$ and $K_2$ pair that convertes plaintext to ciphertext.
+	\item	
+	With $K_1$ + $K_2$ sum per letter space on hand, one can encrypt and decrypt under the same format of the original key pair.
+	\end{itemize}
+\end{itemize}
+
+
+ \item[Problem 5 (14 pts)]
+Consider the following enhancement of the Vigen\`{e}re cipher.  We assume that the plaintext is a case-insensitive English text using only the 26 letters (without space or any other symbol).  To encrypt a plaintext of length $n$, one first uniformly randomly generates a string over the alphabet $[A..Z]$ of length $17$, and then inserts this string into the beginning of the plaintext.  That is, we first construct a string $x=x_1x_2\ldots x_{n+17}$, such that $x_1\cdots x_{17}$ is the string we have generated, and $x_{18}\cdots x_{n+17}$ is the original plaintext string.  We then construct a string $y$ as follows: $y_i=x_i$ for $1\leq i\leq 17$, and for $i\in [18,n+17]$, $y_i$ is the result of using $y_{i-17}$ to encrypt $x_i$; that is, when the $x_i$'s and $y_i$'s are treated as numbers in $[0..25]$, we have $y_i \leftarrow ((x_i + y_{i-17}) \mod 26)$.  We then apply the Vigen\`{e}re cipher to the string $y$, while making sure that the key length is not a multiple of $17$.
+
+\begin{itemize}
+ \item
+Implement the encryption algorithm and decryption algorithm for this cipher in a programming language of your choice.  Include the core part of your code.
+	\begin{itemize}
+	\item 
+	core part at the end of document
+	\end{itemize}
+
+ \item
+Choose a key, a plaintext, and run the encryption code multiple times, and ensure that the decryption results in the original plaintext. Include the key, the plaintext, and 3 ciphertexts.\\
+	plaintext: FANCYPLAINTEXTTHATISLONG \\
+	key: SOMEKINDOFKEYNOTAMULTIPLEOFSEVENTEEN
+	\begin{itemize}
+	\item 
+	ciphertext 1: VONELVAZEYIAHQYRQUUZVHRJAMLJEBAQYUAVLZBED
+	\item
+	ciphertext 2: XOFOUXMWBARAUNCYVWURFQTVXJNSEOXUFZCVDJKGP
+	\item
+	ciphertext 3: OKATCHZUUXRLXKATZNQMKYDIVCKSPRUSADTRYOSQC
+	\end{itemize}
+
+ \item
+Write the Pseudo-code to recover enough information from a known (plaintext,ciphertext) pair to decrypt other messages encrypted under the same key.  That is, the pseudo-code takes three inputs $(M_1,C_1,C_2)$, where $C_1$ is a ciphertext of $M_1$, and outputs $M_2$, the message encrypted in $C_2$.
+
+	\begin{itemize}
+	\item 
+	recover(M1,C1,C2)
+		\begin{itemize}
+		\item
+		\{ \\
+		n1 = length of M1; \\
+		char M1FirstPart[17], C2FirstPart[17], C1FirstPart[17]; \\
+		char M1NextPart[n - 17], C2NextPart[n - 17], C1NextPart[n - 17]; \\
+		divideInto2Parts(M1,M1FirstPart,M1NextPart); //Divide M1 into 2 parts \\
+		divideInto2Parts(C2,C2FirstPart,C2NextPart); //Divide C2 into 2 parts \\
+		divideInto2Parts(C1,C1FirstPart,C1NextPart); //Divide C1 into 2 parts \\
+		char keyForFirstPart[17] = kasiskyTest(M1FirstPart,C1FirstPart); //Find key used to encrypt the first 17 elements.\\
+		char M2FirstPart[17] = decrypt(C2FirstPart, keyForFirstPart); // Use the key found to decrypt the first 17 elements of C2.\\
+		if( keyForFirstPart has repetition)
+			\begin{itemize}
+			\item
+			\{ \\
+			char key[] = trim(keyForFirstPart); //Find the key in its actual length \\
+			char keyPadded[n - 17] = pad(keyForFirstPart, n-17); //Pad the key to length of second part.\\
+			char M2NextPart[n - 17] = decrypt(C2NextPart, keyPadded);//Decrypt C2 using the key. \\
+		\}
+			\item
+			else\{ \\
+			int value; \\
+			while(tries $<$ n AND NOTfound)  // Loop to try values \\
+				\{ \\
+				char key[] = kasiskyTest(M1NextPart,C1NextPart, 17, value); //Use Kasisky Test to find patterns in distance of common multiples of 17 and the value specified until a key is found.\\
+				do\{ //Skipping values multiple of 17\\
+					value++; \\
+				\}while(value MOD 17 == 0); //end do-while loop \\
+			\} //end while loop \\
+			char keyPadded[n - 17] = pad(key, n-17); //Pad the key to length of second part.\\
+			char M2NextPart[n - 17] = decrypt(C2NextPart, keyPadded);//Decrypt C2 using the key. \\
+		\} //End if-else
+			\end{itemize}
+		Combine2Parts(M1FirstPart, M1NextPart); //Combine the 2 parts.
+	\end{itemize}
+	\} //End Recover function\\
+	\end{itemize}
+
+ \item
+How to effectively attack this cipher in a ciphertext only attack?
+	\begin{itemize}
+	\item 
+	Since the first 17 elements are only encrypted once in Vigenere fashion, groups of letters in ciphertext will always match to a certain plaintext-key pair according to Kasisky test, even if the plaintext are randomly generated. Thus the first 17 elements can be obtained. Then, after the 18th element till the end, attack the cipher by finding whether a pattern exsists in a distance of common multiples of 17 (length of first portion) and the non-17-multiple key length.
+	\end{itemize}
+\end{itemize}
+\textbf{Hint: You may want to do this question last. }\\
+
+ \item[Problem 6 (10 pts)]
+Consider an example of encrypting the result of a 6-side dice (i.e., $M \in [1..6]$), as follows.
+Uniformly randomly chooses $K \in [1..6]$, ciphertext is $C= (M*K) \mod 13$.  The ciphertext space is thus $[1..12]$.
+We have $\Pr[\PT=1]=\Pr[\PT=2]=\Pr[\PT=3]=\cdots=\Pr[\PT=6]=1/6$, and we use a vector notation $\Pr[\PT]=\tuple{1/6,1/6,\ldots,1/6}$ to denote this.
+
+\begin{itemize}
+ \item
+Assume that you stole a glance at the dice value and saw that there are many dots on it, and hence are quite certain that
+$M$ is either a 5 or a 6.  You then learned the ciphertext of the encrypted dice value.  Under which ciphtertext value(s)
+can you learn the value $M$.
+
+\textbf{Hint: You may want to start by writing out the 6 by 6 table of the ciphertext for each possible combination of plaintext and key.}
+	\begin{itemize}
+	\item
+		\begin{tabular}{|c|c|c|c|c|c|c|} 
+		\hline
+		 & M = 1 & M = 2 & M = 3 & M = 4 & M = 5 & M = 6
+		\\ \hline
+		K = 1 & (1,1); C = 1 & (1,2); C = 2 & (1,3); C = 3 & (1,4); C = 4 & (1,5); C = 5 & (1,6); C = 6
+		\\ \hline
+		K = 2 & (2,1); C = 2 & (2,2); C = 4 & (2,3); C = 6 & (2,4); C = 8 & (2,5); C = 10 & (2,6); C = 12
+		\\ \hline
+		K = 3 & (3,1); C = 3 & (3,2); C = 6 & (3,3); C = 9 & (3,4); C = 12 & (3,5); C = 2 & (3,6); C = 5
+		\\ \hline
+		K = 4 & (4,1); C = 4 & (4,2); C = 8 & (4,3); C = 12 & (4,4); C = 3 & (4,5); C = 7 & (4,6); C = 11
+		\\ \hline
+		K = 5 & (5,1); C = 5 & (5,2); C = 10 & (5,3); C = 2 & (5,4); C = 7 & (5,5); C = 12 & (5,6); C = 4
+		\\ \hline
+		K = 6 & (6,1); C = 6 & (6,2); C = 12 & (6,3); C = 5 & (6,4); C = 11 & (6,5); C = 4 & (6,6); C = 10
+		\\ \hline
+		\end{tabular} 
+	\item 
+	According to the chart, if M is either 5 or 6, with ciphertexts equivalent to 2 or 7, K must be 3 and 4, correspondingly, so M must be 5. I ciphertexts is 6 or 11, K must be 1 and 4, correspondingly, so M must be 6.\\
+	\end{itemize}
+ \item
+Compute $\Pr[\PT| \CT=i]$, for each $i\in [1..12]$, similar to the one for $\Pr[\PT]$ given above.
+	\begin{itemize}
+	\item
+	$\Pr[\PT| \CT=1] = \tuple{\frac{1}{36},0,0,0,0,0}$ 
+	\item
+	$\Pr[\PT| \CT=2] = \tuple{\frac{1}{36}, \frac{1}{36}, \frac{1}{36}, 0, \frac{1}{36},0}$ 
+	\item
+	$\Pr[\PT| \CT=3] = \tuple{\frac{1}{36},0,\frac{1}{36}, \frac{1}{36},0,0}$ 
+	\item
+	$\Pr[\PT| \CT=4] = \tuple{\frac{1}{36}, \frac{1}{36}, 0, \frac{1}{36}, \frac{1}{36}, \frac{1}{36}}$
+	\item
+	$\Pr[\PT| \CT=5] = \tuple{\frac{1}{36}, 0, \frac{1}{36}, 0, \frac{1}{36}, \frac{1}{36}}$ 
+	\item
+	$\Pr[\PT| \CT=6] = \tuple{\frac{1}{36}, \frac{1}{36}, \frac{1}{36}, 0, 0, \frac{1}{36}}$ 
+	\item
+	$\Pr[\PT| \CT=7] = \tuple{0,0,0,\frac{1}{36},\frac{1}{36},0}$ 
+	\item
+	$\Pr[\PT| \CT=8] =\tuple{0,\frac{1}{36},0,\frac{1}{36},0,0}$
+	\item
+	$\Pr[\PT| \CT=9] = \tuple{0,0,\frac{1}{36}, 0,0,0}$ 
+	\item
+	$\Pr[\PT| \CT=10] =\tuple{0,\frac{1}{36},0,0,\frac{1}{36},\frac{1}{36}}$ 
+	\item
+	$\Pr[\PT| \CT=11] = \tuple{0,0,0,\frac{1}{36},0,\frac{1}{36}}$ 
+	\item
+	$\Pr[\PT| \CT=12] = \tuple{0, \frac{1}{36}, \frac{1}{36}, \frac{1}{36}, \frac{1}{36}, \frac{1}{36}}$
+	\end{itemize}
+ \item
+Show that if $K$ is uniformly randomly chosen from $[1..12]$, then this cipher provides perfect secrecy.
+\end{itemize}
+		\begin{tabular}{|c|c|c|c|c|c|c|} 
+		\hline
+		 & M = 1 & M = 2 & M = 3 & M = 4 & M = 5 & M = 6
+		\\ \hline
+		K = 1 & (1,1); C = 1 & (1,2); C = 2 & (1,3); C = 3 & (1,4); C = 4 & (1,5); C = 5 & (1,6); C = 6
+		\\ \hline
+		K = 2 & (2,1); C = 2 & (2,2); C = 4 & (2,3); C = 6 & (2,4); C = 8 & (2,5); C = 10 & (2,6); C = 12
+		\\ \hline
+		K = 3 & (3,1); C = 3 & (3,2); C = 6 & (3,3); C = 9 & (3,4); C = 12 & (3,5); C = 2 & (3,6); C = 5
+		\\ \hline
+		K = 4 & (4,1); C = 4 & (4,2); C = 8 & (4,3); C = 12 & (4,4); C = 3 & (4,5); C = 7 & (4,6); C = 11
+		\\ \hline
+		K = 5 & (5,1); C = 5 & (5,2); C = 10 & (5,3); C = 2 & (5,4); C = 7 & (5,5); C = 12 & (5,6); C = 4
+		\\ \hline
+		K = 6 & (6,1); C = 6 & (6,2); C = 12 & (6,3); C = 5 & (6,4); C = 11 & (6,5); C = 4 & (6,6); C = 10
+		\\ \hline
+		K = 7 & (7,1); C = 7 & (7,2); C = 1 & (7,3); C = 8 & (7,4); C = 2 & (7,5); C = 9 & (7,6); C = 3
+		\\ \hline
+		K = 8 & (8,1); C = 8 & (8,2); C = 3 & (8,3); C = 11 & (8,4); C = 6 & (8,5); C = 1 & (8,6); C = 9
+		\\ \hline
+		K = 9 & (9,1); C = 9 & (9,2); C = 5 & (9,3); C = 1 & (9,4); C = 10 & (9,5); C = 6 & (9,6); C = 2
+		\\ \hline
+		K = 10 & (10,1); C = 10 & (10,2); C = 7 & (10,3); C = 4 & (10,4); C = 1 & (10,5); C = 11 & (10,6); C = 8
+		\\ \hline
+		K = 11 & (11,1); C = 11 & (11,2); C = 9 & (11,3); C = 7 & (11,4); C = 5 & (11,5); C = 3 & (11,6); C = 1
+		\\ \hline
+		K = 12 & (12,1); C = 12 & (12,2); C = 11 & (12,3); C = 10 & (12,4); C = 9 & (12,5); C = 8 & (12,6); C = 7
+		\\ \hline
+		\end{tabular}
+
+	\begin{itemize} 
+	\item 
+	As can be seen from the chart above, C can be used to represent any value of M with corresponding K. For this reason, $\Pr[\CT=C \mid \PT = M_1] = \Pr[\CT=C \mid \PT=M_2] $ holds. \\
+	 $\therefore $ If $K$ is uniformly randomly chosen from $[1..12]$, then this cipher provides perfect secrecy.
+	\end{itemize}
+
+
+
+ \item[Problem 7 (5 pts)]
+Consider the following way of using the Vigenere cipher to send one encrypted message.  The possible
+plaintexts are English texts of length $100$.  The key is a random string of length $50$.  Show that
+this does not satisfy perfect secrecy by finding two plaintext messages $M_1$, $M_2$ and a ciphertext message $C$
+such that:
+    $$\Pr[\CT=C_0 \mid \PT = M_1] \ne \Pr[\CT=C_0 \mid \PT=M_2] $$
+
+	\begin{itemize}
+	\item
+	$M_1$ = somelongtext... (length of 100) \\
+	$M_2$ = $C$ = someothertext... (length of 100)\\
+	\item
+	$\Pr[\CT=C_0 \mid \PT = M_1] = \Pr$[key matching $M_1$ to $C_0$ is chosen] = $\frac{1}{(26)^{50}} $\\
+	Let $M_2$ = $C_0$. The only key that possibly match them is when key = all A's.\\
+	$\Pr[\CT=C_0 \mid \PT = M_2] = \Pr$[key matching $M_2$ to $C_0$ is chosen] = 1\\
+	$\therefore \Pr[\CT=C_0 \mid \PT = M_1] \ne \Pr[\CT=C_0 \mid \PT=M_2] $ \\
+	\end{itemize}
+%
+% \item[Problem 8 (8 pts)]
+%We define perfect secrecy as: \textbf{For any} probability distribution over a set of equal-length messages,
+%from which the plaintext is drawn, \textbf{for any} plaintext-ciphertext pair $(M_0,C_0)$, we have
+%    $$\Pr[\PT = M_0 \mid \CT=C_0] = \Pr[\PT=M_0].$$
+%Prove that a cipher in which the key is uniformly-randomly drawn from a key space provides perfect secrecy \textbf{if and only if} for any plaintexts $M_0,M_1$ and any ciphertext $C_0$, the number of keys that encrypts $M_0$ to $C_0$ is the same as the number of keys that encrypts $M_1$ to $C_0$.
+
+
+ \item[Problem 8 (5 pts)]
+Prove that for any cipher that offers perfect secrecy, the number of the possible keys must be at least as large as the number of plaintexts.\\
+	\begin{itemize}
+	\item
+	To reach perfect secrecy, probability of $n$ messages map to the same ciphertext is the same. That means to differentiate $n$ messages out of a single ciphertext requries $n$ different keys, as the same key applied on the ciphertext produces same result. On the other hand, if applying the same key to a ciphertext yields different result, one cannot uniquely distinguish different plaintexts from a single ciphertext. \\
+	$\therefore$ The number of the possible keys must be at least as large as the number of plaintexts.\\
+	\end{itemize}
+ \item[Problem 9 (10 pts)]
+Implement the following encryption/decryption function, which uses the RC4 stream cipher.  
+\begin{itemize} 
+ \item
+byte[] encrypt(byte[] pt, byte[] key)
+
+ \item
+byte[] decrypt(byte[] ct, byte[] key)
+\end{itemize}
+
+You should implement RC4 algorithm yourself.  Google to find out the algorithm.  You can assume that the key is an array of length between 16 and 32 bytes.  You need to use a 256-bit (32-byte) initial vector so that when one invokes the encrypt function with the same pair of plaintext and key twice, with high probability the resulting ciphertexts are different.
+
+You can choose any programming language to do this problem.   You need to figure out what library function to call to generate a random IV.  Note that the random IV is required to be unpredictable.  This call to generate IV should be the only library call.  You should drop the first 3072 bytes of RC4's output as recommended.  You should run your code to verify that decrypt(encrypt(pt, key), key) = pt.
+
+Include your code in the HW submission, and provide information regarding the library function you use to generate the random IV.
+	\begin{itemize} 
+	\item
+	Code and screenshots are submitted separately in HW1Q9. Core part at the end of the document.
+	\item The library function called and used in this problem was time(0) to fetch the computer time as seed, srand() to set a seed, and rand() to generate the corresponding sets of random numbers.
+	\end{itemize}  
+
+\end{description}
+
+
+\end{document}
