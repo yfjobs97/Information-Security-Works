@@ -1,0 +1,1 @@
+Action field must link to post_php, message field must link to the location of this php

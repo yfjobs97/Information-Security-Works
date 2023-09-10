@@ -1,0 +1,1 @@
+After login with guest, copy the link in the previous file to URL box
