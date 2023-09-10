@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1615586196 source:e:\old e\cs homework\cs 6324\hw2\hw2q7\hw2q7.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+
